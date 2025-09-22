@@ -1,0 +1,51 @@
+# Dependencies
+node_modules
+npm-debug.log
+yarn-error.log
+package-lock.json
+
+# Environment files
+.env.local
+.env.*.local
+
+# Git
+.git
+.gitignore
+
+# Documentation
+*.md
+MOCK_MODE_GUIDE.md
+OAUTH_VERIFICATION_GUIDE.md
+QUICK_START.md
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+coverage
+.nyc_output
+
+# Logs
+logs
+*.log
+
+# Uploads (will be created in container)
+uploads/*
+
+# Temporary files
+tmp
+temp
+*.tmp
+
+# Docker
+Dockerfile*
+docker-compose*.yml
+.dockerignore
