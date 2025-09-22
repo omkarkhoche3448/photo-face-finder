@@ -1,0 +1,39 @@
+FROM node:20-alpine
+
+# Install build dependencies for native modules and Sharp
+RUN apk add --no-cache \
+    python3 \
+    make \
+    g++ \
+    cairo-dev \
+    jpeg-dev \
+    pango-dev \
+    giflib-dev \
+    vips-dev \
+    fftw-dev \
+    libc6-compat
+
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+
+# Install dependencies
+RUN npm ci
+
+# Force rebuild Sharp for Alpine Linux
+RUN npm rebuild sharp --platform=linux --arch=x64 --libc=musl
+
+# Copy application code (excluding node_modules)
+COPY src/ ./src/
+COPY migrations/ ./migrations/
+COPY .env .env
+COPY *.js .
+
+# Create uploads directory
+RUN mkdir -p uploads
+
+EXPOSE 3000
+
+# Start with nodemon for development
+CMD ["npm", "run", "dev"]
